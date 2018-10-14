@@ -33,7 +33,7 @@ def webhook():
                 reply(text)
             elif '\\bot show' in message['text']:
                 s = message['text'].split()
-                name_interest = s[s.index('show')+1]
+                name_interest = s[s.index('show')+1] + " " + s[s.index('show')+2] # THIS IS BAD! :( just for not lol
                 person_of_interest = db.session.query(Person).filter_by(name=name_interest).first()
                 if person_of_interest:
                     persons_messages = db.session.query(Message).filter_by(owner_id=person_of_interest.id)

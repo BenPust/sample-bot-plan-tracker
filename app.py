@@ -38,7 +38,6 @@ def webhook():
                 if person_of_interest:
                     persons_messages = db.session.query(Message).filter_by(owner_id=person_of_interest.id)
                     texts = str([x.string for x in persons_messages])
-                    return texts
                     reply(texts)
                 else:
                     reply("{} has not said anything".format(name_interest))

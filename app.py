@@ -23,22 +23,30 @@ def hello():
 def webhook():
     message = request.get_json()
 
+    print('### HERE:', message)
+
     if not sender_is_bot(message):
 
         person = get_or_create(db.session, Person, name=message['name'])
 
         if intended_for_bot(message):
-            reply("msg received! {}".format(message["text"]))
-            if '\bot show ' in message['text']:
+            if '\\bot help' in message['text']:
+                text = 'Hello!\nI save messages in a group chat and can get them when asked.\n\'\\bot show Ben Pust\' - will return all of the things Ben Pust has said.'
+                reply(text)
+            elif '\\bot show' in message['text']:
                 s = message['text'].split()
                 name_interest = s[s.index('show')+1]
                 person_of_interest = db.session.query(Person).filter_by(name=name_interest).first()
-                persons_messages = db.session.query(Message).filter_by(owner_id=person_of_interest)
-                texts = str([x.string for x in persons_messages])
-                reply(texts)
+                if person_of_interest:
+                    persons_messages = db.session.query(Message).filter_by(owner_id=person_of_interest.id)
+                    texts = str([x.string for x in persons_messages])
+                    return texts
+                    reply(texts)
+                else:
+                    reply("{} has not said anything".format(name_interest))
         else:
             # save what is said
-            message_db_object = Message(string=message['text'],owner_id=person)
+            message_db_object = Message(string=message['text'],owner_id=person.id)
             db.session.add(message_db_object)
             db.session.commit()
             reply("...")

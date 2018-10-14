@@ -23,8 +23,6 @@ def hello():
 def webhook():
     message = request.get_json()
 
-    print('### HERE:', message)
-
     if not sender_is_bot(message):
 
         person = get_or_create(db.session, Person, name=message['name'])

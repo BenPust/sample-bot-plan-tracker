@@ -23,7 +23,7 @@ def hello():
 def webhook():
     message = request.get_json()
 
-    if sender_is_bot(message):
+    if not sender_is_bot(message):
         reply("msg received! {}".format(message["text"]))
 
     return "OK", 200

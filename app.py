@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 from models import *
 
-bot_id = "TODO"
+bot_id = "f40ac55047d4d7ca28114e1ddd"
 
 @app.route('/', methods=['GET'])
 def hello():
@@ -23,7 +23,8 @@ def hello():
 def webhook():
     message = request.get_json()
 
-    # Do something
+    if sender_is_bot(message):
+        reply("msg received! {}".format(message["text"]))
 
     return "OK", 200
 

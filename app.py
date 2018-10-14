@@ -24,11 +24,23 @@ def webhook():
     message = request.get_json()
 
     if not sender_is_bot(message):
-        reply("msg received! {}".format(message["text"]))
+        if intended_for_bot(message):
+            reply("msg received! {}".format(message["text"]))
+        else:
+            reply("not for me!")
 
     return "OK", 200
 
 # MARK: - helper methods
+
+# MARK: parsing
+
+def intended_for_bot(message):
+    if '\\bot' in message["text"]:
+        return True
+    return False
+
+# MARK: communication
 
 # Send a message in the groupchat
 def reply(msg):

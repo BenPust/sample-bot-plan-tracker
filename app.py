@@ -31,7 +31,7 @@ def webhook():
             if '\\bot hey' in message['text']: 
                 reply_with_image('well done: big up', 'https://i.dailymail.co.uk/i/pix/2012/11/30/article-0-0B171630000005DC-93_306x423.jpg')
             elif '\\bot help' in message['text']:
-                text = 'Hello!\nI save messages in a group chat and can get them when asked.\n\'\\bot show Ben Pust\' - will return all of the things Ben Pust has said.\nYou can also try \'\\bot hey\'
+                text = 'Hello!\nI save messages in a group chat and can get them when asked.\n\'\\bot show Ben Pust\' - will return all of the things Ben Pust has said.\nYou can also try \'\\bot hey\''
                 reply(text)
             elif '\\bot show' in message['text']:
                 s = message['text'].split()

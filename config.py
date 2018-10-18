@@ -12,6 +12,7 @@ class Config(object):
 
 class ProductionConfig(Config):
     DEBUG = False
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 
 class StagingConfig(Config):

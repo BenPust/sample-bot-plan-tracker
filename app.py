@@ -13,7 +13,7 @@ db = SQLAlchemy(app)
 
 from models import *
 
-bot_id = "f40ac55047d4d7ca28114e1ddd"
+bot_id = os.environ['BOT_ID']
 
 @app.route('/', methods=['GET'])
 def hello():
